@@ -1,58 +1,30 @@
-import java.io.IOException;
-import java.nio.file.Files;
+import todo.TodoFileReader;
+import todo.TodoUsage;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class TodoMain {
   public static void main(String[] args) {
+    TodoFileReader fileManage = new TodoFileReader();
+    TodoUsage usage = new TodoUsage();
+    Path filePath = Paths.get("D:\\GreenFox\\zombityu-todo-app\\todo\\src\\todo\\todoList.txt");
+    List<String> todoList = fileManage.fileReader(filePath);
 
     if (args.length == 0){
-      info();
+      usage.info();
 
     } else if (args[0].equals("-l")){
-      fileReader();
+      fileManage.todoPrintOut(todoList);
+
+    }else if (args[0].equals("-a") && args.length==2){
+      fileManage.addTodo(args[1],todoList,filePath);
+    }else{
+      System.out.println("Unable to add: no task provided");
     }
 
     }
-
-  private static void fileReader() {
-    Path filePath = Paths.get("D:\\GreenFox\\zombityu-todo-app\\todo\\todoList.txt");
-    List <String> todoList = new ArrayList<>();
-
-    try {
-      todoList = Files.readAllLines(filePath);
-
-    } catch (IOException e) {
-      System.out.println("Error");
-    }
-
-    if (todoList.size() == 0){
-      System.out.println(" No todos for today! :) ");
-    }else {
-      for (int i = 0; i <todoList.size() ; i++) {
-        System.out.println(i + 1 + " - " + todoList.get(i));
-    }
-    }
-
-  }
-
-  private static void info() {
-    String line = "Command Line TodoMain application";
-      System.out.println(line);
-      for (int i = 0; i <line.length(); i++) {
-        System.out.print("=");
-      }
-      System.out.println();
-      System.out.println("\nCommand line arguments:");
-      System.out.println("\t-l\tLists all the tasks\n\t-a\tAdds a new task\n\t-r\tRemoves an task\n\t-c\tCompletes an task");
-    System.out.println();
-  }
-
-
-
-
-
-
 }
