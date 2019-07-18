@@ -35,15 +35,7 @@ public class TodoFileReader {
       }
     }
   }
-
-  public static void addTodo(String todo, List<String> todolist,Path filePath){
-      todolist.add(todo);
-
-    try {
-      Files.write(filePath,todolist);
-    } catch (IOException e) {
-      System.out.println("Error");
     }
 
-  }
-}
+
+
