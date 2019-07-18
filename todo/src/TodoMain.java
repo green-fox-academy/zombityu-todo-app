@@ -20,7 +20,7 @@ public class TodoMain {
   private static void fileReader() {
     Path filePath = Paths.get("D:\\GreenFox\\zombityu-todo-app\\todo\\todoList.txt");
     List <String> todoList = new ArrayList<>();
-    
+
     try {
       todoList = Files.readAllLines(filePath);
 
@@ -28,8 +28,12 @@ public class TodoMain {
       System.out.println("Error");
     }
 
-    for (int i = 0; i <todoList.size() ; i++) {
-      System.out.println(i+1+" - "+todoList.get(i));
+    if (todoList.size() == 0){
+      System.out.println(" No todos for today! :) ");
+    }else {
+      for (int i = 0; i <todoList.size() ; i++) {
+        System.out.println(i + 1 + " - " + todoList.get(i));
+    }
     }
 
   }
